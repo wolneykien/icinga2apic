@@ -82,5 +82,9 @@ class Events(Base):
             payload,
             stream=True
         )
-        for event in self._get_message_from_stream(stream):
-            yield event
+
+        def gen():
+            for event in self._get_message_from_stream(stream):
+                yield event
+
+        return gen()
